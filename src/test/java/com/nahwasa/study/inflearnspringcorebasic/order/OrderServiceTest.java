@@ -1,25 +1,19 @@
 package com.nahwasa.study.inflearnspringcorebasic.order;
 
-import com.nahwasa.study.inflearnspringcorebasic.AppConfig;
 import com.nahwasa.study.inflearnspringcorebasic.member.Grade;
 import com.nahwasa.study.inflearnspringcorebasic.member.Member;
 import com.nahwasa.study.inflearnspringcorebasic.member.MemberService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest
 class OrderServiceTest {
-    private MemberService memberService;
-    private OrderService orderService;
-
-    @BeforeEach
-    void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        orderService = appConfig.orderService();
-    }
+    @Autowired private MemberService memberService;
+    @Autowired private OrderService orderService;
 
     @Test
     @DisplayName("주문 생성 테스트")

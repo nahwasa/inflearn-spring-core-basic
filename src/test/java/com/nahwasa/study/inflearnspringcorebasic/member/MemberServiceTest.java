@@ -1,21 +1,16 @@
 package com.nahwasa.study.inflearnspringcorebasic.member;
 
-import com.nahwasa.study.inflearnspringcorebasic.AppConfig;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest
 class MemberServiceTest {
 
-    private MemberService memberService;
-
-    @BeforeEach
-    void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-    }
+    @Autowired private MemberService memberService;
 
     @Test
     @DisplayName("회원 가입 테스트")
