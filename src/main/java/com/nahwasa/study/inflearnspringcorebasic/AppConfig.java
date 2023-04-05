@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 구현 객체를 생성하고, 연결하는 책임을 가지는 별도의 설정 클래스임.
+ * 애노테이션 기반의 자바 설정 클래스로 스프링 컨테이너를 만든 것
  */
 
 @Configuration
