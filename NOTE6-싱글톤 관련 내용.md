@@ -20,5 +20,14 @@
 ## 싱글톤 주의점
 * stateless 여야함
   * 필요하다면 필드 대신에 자바에서 공유되지 않는 지역변수, 파라미터, ThreadLocal 등을 사용해야함
-* 
 
+## @Configuration과 바이트코드
+* 스프링 컨테이너는 싱글톤 레지스트리
+* AppConfig 처럼 new ~ 이런식으로 작성되어 있는 자바 코드라도 싱글톤으로 등록될 수 있어야 함.
+  * 예를들어 memberService()와 orderService()에서 각각 new MemoryMemberRepository() 를 호출하지만, MemoryMemberRepository는 하나만 생성되어야 함.
+* AppConfig 처럼 @Configuration을 붙일 경우 스프링이 CGLIB라는 바이트코드 조작 라이브러리를 써서 AppConfig 클래스를 상속받은 임의의 다른 클래스를 만들고, 그 다른 클래스를 스프링 빈으로 등록한 것임.
+  * ConfigurationSingletonTest 테스트 출력 : "bean.getClass() = class com.nahwasa.study.inflearnspringcorebasic.AppConfig$$SpringCGLIB$$0"
+  * 이런식으로 싱글톤이 보장되도록 처리됨.
+  * 또, AppConfig@CGLIB는 AppConfig의 자식이므로 ConfigurationSingletonTest에서 부모를 조회 시 자식은 전부 끌려나오므로 조회 가능.
+  * @Configuration 없이 @Bean만 있다면, 혹은 @Component -> 싱글톤으로 동작 안함!
+* 스프링 설정정보엔 항상 @Configuration을 넣어주자.
